@@ -353,7 +353,7 @@ export default function Portfolio() {
                 <div className="w-full h-full rounded-full bg-[#112240] overflow-hidden relative">
                   {/* Replace 'profile.jpg' with your actual image filename */}
                   <Image
-                    src="/dp2.jpeg"
+                    src="/dp2.JPEG"
                     alt="Lakmina Welagedara"
                     fill
                     sizes="(max-width: 768px) 256px, 320px"
