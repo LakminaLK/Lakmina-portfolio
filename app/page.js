@@ -7,6 +7,7 @@ export default function Portfolio() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState('home');
   const [showBackToTop, setShowBackToTop] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const observerRef = useRef(null);
 
   // Intersection Observer for scroll animations
@@ -294,7 +295,10 @@ export default function Portfolio() {
               ))}
             </div>
             {/* Mobile menu button */}
-            <button className="md:hidden text-[#64ffda]">
+            <button 
+              className="md:hidden text-[#64ffda]"
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            >
               <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
               </svg>
@@ -303,8 +307,29 @@ export default function Portfolio() {
         </div>
       </nav>
 
+      {/* Mobile Menu */}
+      {mobileMenuOpen && (
+        <div className="md:hidden fixed top-16 left-0 right-0 bg-[#0a192f]/95 backdrop-blur-lg border-b border-[#64ffda]/20 z-40 animate-fade-in">
+          <div className="flex flex-col space-y-4 px-4 py-6">
+            {navLinks.map((link, index) => (
+              <a
+                key={link.name}
+                href={link.href}
+                onClick={() => setMobileMenuOpen(false)}
+                className={`text-lg hover:text-[#64ffda] transition-colors animate-slide-in-left ${
+                  activeSection === link.href.slice(1) ? 'text-[#64ffda]' : ''
+                }`}
+                style={{ animationDelay: `${index * 0.1}s` }}
+              >
+                {link.name}
+              </a>
+            ))}
+          </div>
+        </div>
+      )}
+
       {/* Hero Section */}
-      <section id="home" className="min-h-screen flex items-center justify-center relative overflow-hidden pt-16">
+      <section id="home" className="min-h-[70vh] md:min-h-screen flex items-start md:items-center justify-center relative overflow-hidden pt-32 md:pt-16 pb-8 md:pb-0">
         <div className="absolute inset-0 bg-gradient-to-br from-[#0a192f] via-[#112240] to-[#0a192f]"></div>
         <div className="absolute inset-0 opacity-20">
           <div className="absolute top-20 left-20 w-72 h-72 bg-[#64ffda] rounded-full filter blur-[128px]"></div>
